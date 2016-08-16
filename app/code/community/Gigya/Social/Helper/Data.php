@@ -130,12 +130,39 @@ class Gigya_Social_Helper_Data extends Mage_Core_Helper_Abstract
     public function fetchGigyaSecretKey($type)
     {
         if ("userSecret" == $type) {
-            $key = Mage::getStoreConfig('gigya_global/gigya_global_conf/userSecret');
+            $key = $this->getCurrentScopeConfig('gigya_global/gigya_global_conf/userSecret');
         } else {
-            $key = Mage::getStoreConfig('gigya_global/gigya_global_conf/secretkey');
+            $key = $this->getCurrentScopeConfig('gigya_global/gigya_global_conf/secretkey');
         }
 
         return Mage::helper('core')->decrypt($key);
+    }
+
+    /**
+     * Retrieve configuration for the logical current scope.
+     * Used to retrieve the correctly scoped config while in the admin system configuration or the frontend.
+     *
+     * @param string $path
+     * @return string
+     */
+    public function getCurrentScopeConfig($path)
+    {
+        $request = Mage::app()->getRequest();
+
+        if (Mage::app()->getStore()->isAdmin()) {
+            if ($store = $request->getParam('store')) {
+                $config = Mage::app()->getStore($store)->getConfig($path);
+            } elseif ($website = $request->getParam('website')) {
+                $config = Mage::app()->getWebsite($website)->getConfig($path);
+            } else {
+                $config = Mage::getStoreConfig($path);
+            }
+        } else {
+            $config = Mage::getStoreConfig($path);
+        }
+        $config = Mage::getStoreConfig($path);
+
+        return $config;
     }
 
     /**

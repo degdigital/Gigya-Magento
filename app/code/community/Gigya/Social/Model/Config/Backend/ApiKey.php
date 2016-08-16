@@ -16,7 +16,8 @@ class Gigya_Social_Model_Config_Backend_ApiKey extends Mage_Core_Model_Config_Da
     protected function _beforeSave()
     {
         parent::_beforeSave();
-        $this->beforeChange = Mage::getStoreConfig('gigya_global/gigya_global_conf'); // default store config
+        $helper = Mage::helper('Gigya_Social');
+        $this->beforeChange = $helper->getCurrentScopeConfig('gigya_global/gigya_global_conf'); // default store config
         $value          = $this->getValue(); // the newly submitted values in _dataa
         if (empty($value)) {
             Mage::throwException(Mage::helper('adminhtml')->__("Gigya apiKey is required"));
@@ -24,7 +25,6 @@ class Gigya_Social_Model_Config_Backend_ApiKey extends Mage_Core_Model_Config_Da
         $data           = $this->getData();
         $useUserKey     = $data['fieldset_data']['useUserKey'];
         if ($this->shouldRun($useUserKey, $this->beforeChange)) {
-            $helper = Mage::helper('Gigya_Social');
             $helper->utils->setApiKey($value); // set the api key to the submitted key
             // test if other fields were submitted, or use default values
             // secret
