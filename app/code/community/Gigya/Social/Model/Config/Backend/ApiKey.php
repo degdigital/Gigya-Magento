@@ -121,11 +121,9 @@ class Gigya_Social_Model_Config_Backend_ApiKey extends Mage_Core_Model_Config_Da
      */
     protected function _setDataCenter($fieldset, $default_dc = "us1.gigya.com")
     {
-        $dataCenter = '';
-
-        if ($fieldset['dataCenter']) {
+        if (!empty($fieldset['dataCenter'])) {
             $dataCenter = $fieldset['dataCenter'];
-        } elseif ($fieldset['dataCenterOther']) {
+        } elseif (!empty($fieldset['dataCenterOther'])) {
             $dataCenter = $fieldset['dataCenterOther'] . '.gigya.com';
         } else {
             $dataCenter = $default_dc;
