@@ -79,15 +79,20 @@ class Gigya_Social_Model_Config_Backend_ApiKey extends Mage_Core_Model_Config_Da
     {
         $apiKeyChanged = $this->hasChanged($this->getFieldsetDataValue("apikey"), $current['apikey']);
         $dataCenterChanged = $this->hasChanged($this->getFieldsetDataValue("dataCenter"), $current['dataCenter'] );
-        $userKeyChanged = $this->hasChanged($this->getFieldsetDataValue("userKey"), $current['userKey']);
-            $apiOrDcOrUserKey = $apiKeyChanged || $dataCenterChanged || $userKeyChanged;
-            if ($useUserKey) {
-                $secretChanged = $this->getFieldsetDataValue('userSecret') != "******";
-            } else {
-                $secretChanged = $this->getFieldsetDataValue('secretkey') != "******";
-            }
 
-            return $apiOrDcOrUserKey || $secretChanged;
+        if (isset($current['userKey'])) {
+            $userKeyChanged = $this->hasChanged($this->getFieldsetDataValue("userKey"), $current['userKey']);
+        } else {
+            $userKeyChanged = false;
+        }
+        $apiOrDcOrUserKey = $apiKeyChanged || $dataCenterChanged || $userKeyChanged;
+        if ($useUserKey) {
+            $secretChanged = $this->getFieldsetDataValue('userSecret') != "******";
+        } else {
+            $secretChanged = $this->getFieldsetDataValue('secretkey') != "******";
+        }
+
+        return $apiOrDcOrUserKey || $secretChanged;
 
     }
 
