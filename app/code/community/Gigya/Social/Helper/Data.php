@@ -160,7 +160,6 @@ class Gigya_Social_Helper_Data extends Mage_Core_Helper_Abstract
         } else {
             $config = Mage::getStoreConfig($path);
         }
-        $config = Mage::getStoreConfig($path);
 
         return $config;
     }
