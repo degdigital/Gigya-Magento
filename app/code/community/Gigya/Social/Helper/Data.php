@@ -115,14 +115,14 @@ class Gigya_Social_Helper_Data extends Mage_Core_Helper_Abstract
 
     public function __construct()
     {
-        $this->useUserKey = (bool) Mage::getStoreConfig('gigya_global/gigya_global_conf/useUserKey');
-        $this->userKey    = trim(Mage::getStoreConfig('gigya_global/gigya_global_conf/userKey'));
-        $this->apiKey     = trim(Mage::getStoreConfig('gigya_global/gigya_global_conf/apikey'));
+        $this->useUserKey = (bool) $this->getCurrentScopeConfig('gigya_global/gigya_global_conf/useUserKey');
+        $this->userKey    = trim($this->getCurrentScopeConfig('gigya_global/gigya_global_conf/userKey'));
+        $this->apiKey     = trim($this->getCurrentScopeConfig('gigya_global/gigya_global_conf/apikey'));
         $this->apiSecret  = $this->fetchGigyaSecretKey("siteSecret");
-        $this->apiDomain  = strtolower(trim(Mage::getStoreConfig('gigya_global/gigya_global_conf/dataCenter')));
+        $this->apiDomain  = strtolower(trim($this->getCurrentScopeConfig('gigya_global/gigya_global_conf/dataCenter')));
         $this->userSecret = $this->fetchGigyaSecretKey("userSecret");
-        $this->debug      = (bool) Mage::getStoreConfig('gigya_global/gigya_global_conf/debug_log');
-        $this->userMod    = Mage::getStoreConfig('gigya_login/gigya_user_management/login_modes');
+        $this->debug      = (bool) $this->getCurrentScopeConfig('gigya_global/gigya_global_conf/debug_log');
+        $this->userMod    = $this->getCurrentScopeConfig('gigya_login/gigya_user_management/login_modes');
         $this->utils      = new GigyaCMS($this->apiKey, $this->apiSecret, $this->apiDomain, $this->userSecret,
             $this->userKey, $this->useUserKey, $this->debug);
     }
