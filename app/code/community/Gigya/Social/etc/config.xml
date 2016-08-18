@@ -269,7 +269,7 @@
         </gigya_global>
         <gigya_login>
             <gigya_user_management>
-                <login_modes>social</login_modes>
+                <login_modes>disable</login_modes>
             </gigya_user_management>
             <gigya_login_conf>
                 <buttonsStyle>standart</buttonsStyle>
