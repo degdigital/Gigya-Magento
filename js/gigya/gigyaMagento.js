@@ -494,7 +494,6 @@ gigyaFunctions.RnR = function (settings) {
     settings.linkedCommentsUI = 'customer-reviews';
     settings.imageBehavior = 'product';
     ua = gigyaFunctions.createUserAction(settings);
-    delete settings.ua;
     var reviews = {
         context: {id: 'comments'},
         containerID: 'customer-reviews',
