@@ -66,6 +66,7 @@ class Gigya_Social_ReviewsController  extends Mage_Review_ProductController
                         ->setEntityPkValue($product->getId())
                         ->setStatusId(Mage_Review_Model_Review::STATUS_PENDING)
                         ->setCustomerId(Mage::getSingleton('customer/session')->getCustomerId())
+                        ->setEmail(Mage::getSingleton('customer/session')->getCustomer()->getEmail())
                         ->setStoreId(Mage::app()->getStore()->getId())
                         ->setStores(array(Mage::app()->getStore()->getId()))
                         ->save();
