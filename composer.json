@@ -15,7 +15,7 @@
       ["app/etc/modules/Gigya_Social.xml", "app/etc/modules/Gigya_Social.xml"],
       ["js/gigya/json", "js/gigya/json"],
       ["js/gigya/admin.js", "js/gigya/admin.js"],
-      ["js/gigya/gigyMagento.js", "js/gigya/gigyMagento.js"],
+      ["js/gigya/gigyaMagento.js", "js/gigya/gigyaMagento.js"],
       ["js/gigya/onepage_raas.js", "js/gigya/onepage_raas.js"],
       ["skin/adminhtml/default/default/gigya/social/gigya.css", "skin/adminhtml/default/default/gigya/social/gigya.css"],
       ["skin/frontend/base/default/css/gigya.css", "skin/frontend/base/default/css/gigya.css"],
