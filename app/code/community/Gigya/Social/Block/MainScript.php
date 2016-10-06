@@ -73,20 +73,23 @@ class Gigya_Social_Block_MainScript extends Mage_Core_Block_Text_Tag_Js
     protected function _toHtml()
     {
         if ( ! empty($this->gigyaApiKey)) {
-            $js = "window.__gigyaConf = " . json_encode($this->globalConf) . "
+            $js = "var gigyaMageSettings = gigyaMageSettings || {};
+            gigyaMageSettings.userMode = '" . $this->userMode . "';
+            gigyaMageSettings.magentoStatus = '" . $this->magentoLoggedIn . "';
+            var baseUrl = '" . $this->baseUrl . "';
+            window.__gigyaConf = " . json_encode($this->globalConf) . "
             var gig = document.createElement('script');
             gig.type = 'text/javascript';
             gig.async = true;
             gig.src = ('https:' == document.location.protocol ? 'https://cdns' : 'http://cdn') + '.gigya.com/js/gigya.js?apiKey=" .
                 $this->gigyaApiKey . "&lang=" . $this->lang . "';
-            document.getElementsByTagName('head')[0].appendChild(gig);
-            var gigyaMageSettings = gigyaMageSettings || {};
-            gigyaMageSettings.userMode = '" . $this->userMode . "';
-            gigyaMageSettings.magentoStatus = '" . $this->magentoLoggedIn . "';
-            var baseUrl = '" . $this->baseUrl . "';";
+            document.addEventListener(\"DOMContentLoaded\", function(event) {
+                document.getElementsByTagName('head')[0].appendChild(gig);";
             if (null != $this->raasConf) {
                 $js = $js . "gigyaMageSettings.RaaS = " . $this->raasConf;
             }
+
+            $js = $js . '});';
             $this->setContents($js);
         }
         return  parent::_toHtml();
@@ -94,7 +97,7 @@ class Gigya_Social_Block_MainScript extends Mage_Core_Block_Text_Tag_Js
 
     protected function magentoLocaleToGigyaLang($locale, $default = "en")
     {
-        
+
         $gigyaLangs = array();
         foreach (Mage::helper('Gigya_Social')->getGigyaLanguages() as $l) {
             $gigyaLangs[$l] = $l;
