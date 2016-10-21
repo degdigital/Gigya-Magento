@@ -24,6 +24,10 @@ div.ratings-short .gig-rating div.gig-rating-star-empty {
     background-image: url('../images/gigya/RateIcon_13.png');
 }
 
+div.ratings-short .gig-rating div.gig-rating-star-half {
+    background-image: url('../images/gigya/RateIcon_13_half.png');
+}
+
 .gigya-login {
     height: 240px;
 }
