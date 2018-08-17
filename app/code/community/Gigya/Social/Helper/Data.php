@@ -238,8 +238,6 @@ class Gigya_Social_Helper_Data extends Mage_Core_Helper_Abstract
             $res = $this->_gigya_api('notifyLogin', $params);
             if (is_array($res) && $res["errorCode"] === 0) {
                 setcookie($res["cookieName"], $res["cookieValue"], 0, $res["cookiePath"], $res["cookieDomain"]);
-            } else {
-                Mage::logException($res);
             }
         } catch (Exception $e) {
             $code    = $e->getCode();
